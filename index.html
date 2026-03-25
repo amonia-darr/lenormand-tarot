@@ -86,49 +86,7 @@ const spreads={1:[{label:"今日核心"}],3:[{label:"过去"},{label:"现在"},{
 let cards=[],currentSpread=[];
 function shuffle(d){const a=[...d];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function updateCount(){document.getElementById('cardCount').value=document.getElementById('spreadType').value}
-function draw(){
-const count=parseInt(document.getElementById('cardCount').value);
-const spreadType=document.getElementById('spreadType').value;
-const shuffled=shuffle(deck);
-cards=shuffled.slice(0,count);
-currentSpread=spreads[spreadType];
-const container=document.getElementById('positions');
-container.innerHTML='';
-currentSpread.forEach((pos,i)=>{
-const div=document.createElement('div');
-div.className='position';
-div.id='pos'+i;
-div.innerHTML='<div class="position-label">'+pos.label+'</div>';
-if(cards[i]){
-div.classList.add('filled');
-div.innerHTML+='<div class="card"><div class="num">'+cards[i].num+'</div><div class="name">'+cards[i].name+'</div></div>';
-}
-container.appendChild(div);
-});
-const result=document.getElementById('result');
-result.classList.add('show');
-const summary=document.getElementById('summary');
-summary.innerHTML='<strong>'+(spreadType==1?'单张牌':spreadType==3?'三张牌':spreadType==5?'五张牌':'九宫格')+'解读</strong><br><br>抽牌顺序：'+cards.map(c=>c.name).join(' -> ')+'<br><br>';
-
-';
-const positiveCards=[4,9,16,18,19,24,25,31,33,34],challengingCards=[6,7,8,10,11,20,21,23,26,36];
-let posCount=0,chalCount=0;
-cards.forEach(c=>{
-if(positiveCards.includes(c.num))posCount++;
-if(challengingCards.includes(c.num))chalCount++;
-});
-if(posCount>chalCount)summary.innerHTML+='整体能量：🌞 趋势积极向好，虽有挑战但结果可期。';
-else if(chalCount>posCount)summary.innerHTML+='整体能量：🌧️ 面临较多挑战，需谨慎应对，困难中蕴藏成长。';
-else summary.innerHTML+='整体能量：⚖️ 局势较为平衡，关注牌阵相互作用。';
-const details=document.getElementById('details');
-details.innerHTML='';
-cards.forEach((c,i)=>{
-const detail=document.createElement('div');
-detail.className='card-detail';
-detail.innerHTML='<h3>'+currentSpread[i].label+'：'+c.name+'（第'+c.num+'张）</h3><p class="kw"><strong>关键词：</strong>'+c.kw+'</p><p class="meaning">'+c.mean+'</p>';
-details.appendChild(detail);
-});
-}
+function draw(){const count=parseInt(document.getElementById('cardCount').value),spreadType=document.getElementById('spreadType').value;const shuffled=shuffle(deck);cards=shuffled.slice(0,count);currentSpread=spreads[spreadType];const container=document.getElementById('positions');container.innerHTML='';currentSpread.forEach((pos,i)=>{const div=document.createElement('div');div.className='position';div.id='pos'+i;div.innerHTML='<div class="position-label">'+pos.label+'</div>';if(cards[i]){div.classList.add('filled');div.innerHTML+='<div class="card"><div class="num">'+cards[i].num+'</div><div class="name">'+cards[i].name+'</div></div>'}container.appendChild(div)});const result=document.getElementById('result');result.classList.add('show');const summary=document.getElementById('summary');summary.innerHTML='<strong>'+(spreadType==1?'单张牌':spreadType==3?'三张牌':spreadType==5?'五张牌':'九宫格')+'解读</strong><br><br>抽牌顺序：'+cards.map(c=>c.name).join(' -> ')+'<br><br>';const positiveCards=[4,9,16,18,19,24,25,31,33,34],challengingCards=[6,7,8,10,11,20,21,23,26,36];let posCount=0,chalCount=0;cards.forEach(c=>{if(positiveCards.includes(c.num))posCount++;if(challengingCards.includes(c.num))chalCount++});if(posCount>chalCount)summary.innerHTML+='整体能量：🌞 趋势积极向好，虽有挑战但结果可期。';else if(chalCount>posCount)summary.innerHTML+='整体能量：🌧️ 面临较多挑战，需谨慎应对，困难中蕴藏成长。';else summary.innerHTML+='整体能量：⚖️ 局势较为平衡，关注牌阵相互作用。';const details=document.getElementById('details');details.innerHTML='';cards.forEach((c,i)=>{const detail=document.createElement('div');detail.className='card-detail';detail.innerHTML='<h3>'+currentSpread[i].label+'：'+c.name+'（第'+c.num+'张）</h3><p class="kw"><strong>关键词：</strong>'+c.kw+'</p><p class="meaning">'+c.mean+'</p>';details.appendChild(detail)})}
 function reset(){cards=[];document.getElementById('result').classList.remove('show');document.getElementById('positions').innerHTML=''}
 window.onload=updateCount;
 </script>
