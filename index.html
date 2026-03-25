@@ -108,7 +108,7 @@ container.appendChild(div);
 const result=document.getElementById('result');
 result.classList.add('show');
 const summary=document.getElementById('summary');
-summary.innerHTML='<strong>'+(spreadType==1?'单张牌':spreadType==3?'三张牌':spreadType==5?'五张牌':'九宫格')+'解读</strong><br><br>抽牌顺序：'+cards.map(c=>c.name).join(' -> ')+'<br><br>;
+summary.innerHTML='<strong>'+(spreadType==1?'单张牌':spreadType==3?'三张牌':spreadType==5?'五张牌':'九宫格')+'解读</strong><br><br>抽牌顺序：'+cards.map(c=>c.name).join(' -> ')+'<br><br>';
 
 ';
 const positiveCards=[4,9,16,18,19,24,25,31,33,34],challengingCards=[6,7,8,10,11,20,21,23,26,36];
